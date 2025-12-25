@@ -1,0 +1,29 @@
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+*.cover
+.ipynb_checkpoints
+
+# Model files (opsional - jangan ignore jika ingin deploy model)
+# *.pkl
+# *.joblib
+
+# Environment variables
+.env
+.venv
+env
+venv
