@@ -1,4 +1,11 @@
-
+# Di bagian paling atas file
+try:
+    import joblib
+except ImportError:
+    import subprocess
+    import sys
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "joblib==1.3.2"])
+    import joblib
 import streamlit as st
 import pandas as pd
 import numpy as np
