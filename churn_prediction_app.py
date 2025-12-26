@@ -28,9 +28,27 @@ st.set_page_config(
 # Load the pre-trained model
 @st.cache_resource
 def load_model():
-    return joblib.load('best_churn_model_tuned.pkl')
-
-model = load_model()
+    try:
+        # Cek apakah file model ada
+        model_path = 'best_churn_model_tuned.pkl'
+        if not os.path.exists(model_path):
+            st.error(f"❌ File model tidak ditemukan: {model_path}")
+            st.stop()
+        
+        # Coba muat model
+        return joblib.load(model_path)
+        
+    except ImportError as e:
+        st.error(f"❌ Error: Package tidak terinstal dengan benar")
+        st.error(f"Detail error: {str(e)}")
+        st.info("Pastikan semua dependensi sudah tercantum di requirements.txt")
+        st.stop()
+        
+    except Exception as e:
+        st.error(f"❌ Error saat memuat model: {str(e)}")
+        st.warning("Ini bisa disebabkan oleh ketidakcocokan versi package antara saat training dan deployment")
+        st.info("Saran: Latih ulang model di lingkungan yang sama dengan deployment")
+        st.stop()
 
 # Set style untuk visualisasi
 plt.style.use('seaborn-v0_8')
